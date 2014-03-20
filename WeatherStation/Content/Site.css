@@ -1,0 +1,59 @@
+﻿
+#content
+{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#header {
+    margin-left: 30px;
+    margin-right: 30px;
+    min-width: 850px;
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+    color: Green;
+    font-size: 40px;
+    font-weight: bold;
+    background: lightblue;
+}
+ 
+#maincontainer {
+    height: 300px;
+    min-width: 850px;
+    background: lightblue;
+    margin-bottom: 10px;
+}
+
+    #maincontainer label {
+        width: 250px;
+        height: 300px;
+        text-align: left;
+        float: left;
+        margin-top: 25px;
+        margin-left: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #maincontainer img {
+        float: right;
+        margin-top: 25px;
+        margin-right: 25px;
+        width: 250px;
+        height: 250px;
+        border: 2px solid;
+    }
+
+#dummy {
+    clear:both;
+}
+
+#logo img {
+    width: 450px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+#GraphDropDown {
+    margin-bottom: 30px;
+}

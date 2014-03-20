@@ -1,0 +1,47 @@
+﻿@model WeatherStation.Models.WeatherInfoSet
+
+@{ Html.RenderPartial("_WeatherStation"); }
+
+<div id="TemperatureChartContainer" style="max-width:1400px;height: 500px;"></div>
+
+<script type="text/javascript">
+
+    var JsonTemperatureInfoList = $.parseJSON(@Html.Raw(Json.Encode(Model.JsonTemperatureInfoList)))
+
+    $(function () {
+        $("#TemperatureChartContainer").dxChart({
+            dataSource: JsonTemperatureInfoList,
+
+            legend: {
+                visible: false
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            argumentAxis: {
+                title: 'Time',
+                argumentType: 'datetime'
+            },
+
+            valueAxis: {
+                title: 'Temperature (degrees Celcius)',
+                argumentType: 'datetime'
+            },
+
+            commonSeriesSettings: {
+                argumentField: 'DateTime'
+            },
+
+            series: {
+                color: 'red',
+                valueField: 'Temperature',
+                point: {
+                    visible: false
+                },
+            }
+
+        })
+    })
+</script>

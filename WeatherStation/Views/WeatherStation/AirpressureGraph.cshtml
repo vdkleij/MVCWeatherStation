@@ -1,0 +1,47 @@
+﻿@model WeatherStation.Models.WeatherInfoSet
+
+@{ Html.RenderPartial("_WeatherStation"); }
+
+<div id="AirpressureChartContainer" style="max-width:1400px;height: 500px;"></div>
+
+<script type="text/javascript">
+
+    var JsonAirpressureInfoList = $.parseJSON(@Html.Raw(Json.Encode(Model.JsonAirpressureInfoList)))
+
+    $(function () {
+        $("#AirpressureChartContainer").dxChart({
+            dataSource: JsonAirpressureInfoList,
+
+            legend: {
+                visible: false
+            },
+
+            tooltip: {
+                enabled: true
+            },
+
+            argumentAxis: {
+                title: 'Time',
+                argumentType: 'datetime'
+            },
+
+            valueAxis: {
+                title: 'Airpressure (hPa)',
+                argumentType: 'datetime'
+            },
+
+            commonSeriesSettings: {
+                argumentField: 'DateTime'
+            },
+
+            series: {
+                color: 'green',
+                valueField: 'Airpressure',
+                point: {
+                    visible: false
+                },
+            }
+
+        });
+    })
+</script>

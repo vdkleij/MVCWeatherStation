@@ -1,0 +1,78 @@
+﻿@model WeatherStation.Models.WeatherInfoSet
+
+<div id="maincontainer">
+
+    <label>
+        @if (Model.TemperatureInfoList.Count > 0)
+        {
+            ViewBag.Temperature = Model.TemperatureInfoList.Last().Temperature.ToString() + " °C";
+        }
+        else
+        {
+            ViewBag.Temperature = "-";
+        }
+        @if (Model.HumidityInfoList.Count > 0)
+        {
+            ViewBag.Humidity = Model.HumidityInfoList.Last().Humidity.ToString() + " %";
+        }
+        else
+        {
+            ViewBag.Humidity = "-";
+        }
+        @if (Model.AirpressureInfoList.Count > 0)
+        {
+            ViewBag.Airpressure = Model.AirpressureInfoList.Last().Airpressure.ToString() + " hPa";
+        }
+        else
+        {
+            ViewBag.Airpressure = "-";
+        }
+        Temperature:    @ViewBag.Temperature<br /><br />
+        Humidity:       @ViewBag.Humidity<br /><br />
+        Air Pressure:   @ViewBag.Airpressure<br /><br />
+    </label>
+
+    <img src="@Model.WeatherImageURL"/>
+</div>
+
+<div id="dummy"></div>
+
+<div id="logo">
+    <img src="~/Images/ICT-Automatisering-logo.jpg" />
+</div>
+
+@Html.DropDownListFor(m => m.MySelection, Model.PullDownInfoList,
+                    new { id = "GraphDropDown" })
+
+<script type="text/javascript">
+
+    var WeatherTypeIconUrl = @Html.Raw(Json.Encode(Model.WeathertypeIconUrl));
+
+    var WeatherTypeIcon = new Image();
+
+    @{
+    if(@ViewBag.WeatherUndergroundAvailable == true)
+    {
+        @:WeatherTypeIcon.src = WeatherTypeIconUrl;
+            }
+    else
+    {
+        @:WeatherTypeIcon.alt = "";
+          }
+    }
+
+    document.getElementById("maincontainer").appendChild(WeatherTypeIcon);
+
+    $(function() {
+        $('#GraphDropDown').change(function() {
+            var url = $(this).val();
+            if (url != null && url != '') {
+                window.location.href = url;
+            }
+        });
+    });
+
+</script>
+
+
+

@@ -1,0 +1,50 @@
+﻿@model WeatherStation.Models.WeatherInfoSet
+
+@{ Html.RenderPartial("_WeatherStation"); }
+
+<div id="HumidityChartContainer" style="max-width:1400px;height: 500px;"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var JsonHumidityInfoList = $.parseJSON(@Html.Raw(Json.Encode(Model.JsonHumidityInfoList)))
+
+        $(function () {
+            $("#HumidityChartContainer").dxChart({
+                dataSource: JsonHumidityInfoList,
+
+                legend: {
+                    visible: false
+                },
+
+                tooltip: {
+                    enabled: true
+                },
+
+                argumentAxis: {
+                    title: 'Time',
+                    argumentType: 'datetime'
+                },
+
+                valueAxis: {
+                    title: 'Humidity (relative %)',
+                    min: 0,
+                    max: 100,
+                    argumentType: 'datetime',
+                },
+
+                commonSeriesSettings: {
+                    argumentField: 'DateTime'
+                },
+
+                series: {
+                    color: 'blue',
+                    valueField: 'Humidity',
+                    point: {
+                        visible: false
+                    },
+                }
+
+            })
+        })
+    });
+</script>
